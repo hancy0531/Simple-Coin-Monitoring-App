@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Coco" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/red</item>
+    </style>
+    
+    <style name="Base.Theme.Coco.Splash" parent="Theme.SplashScreen" >
+        <item name="windowSplashScreenBackground">@color/red</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/graph</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.Coco</item>
+    </style>
+
+    <style name="Theme.Coco" parent="Base.Theme.Coco" />
+</resources>
