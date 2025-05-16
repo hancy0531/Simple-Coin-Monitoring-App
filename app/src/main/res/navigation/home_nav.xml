@@ -9,10 +9,23 @@
         android:id="@+id/coinListFragment"
         android:name="com.example.coco.view.main.CoinListFragment"
         android:label="fragment_coin_list"
-        tools:layout="@layout/fragment_coin_list" />
+        tools:layout="@layout/fragment_coin_list" >
+        <action
+            android:id="@+id/action_coinListFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/priceChangeFragment"
         android:name="com.example.coco.view.main.PriceChangeFragment"
         android:label="fragment_price_change"
         tools:layout="@layout/fragment_price_change" />
+    <fragment
+        android:id="@+id/coinDetailFragment"
+        android:name="com.example.coco.view.main.CoinDetailFragment"
+        android:label="fragment_coin_detail"
+        tools:layout="@layout/fragment_coin_detail" >
+        <action
+            android:id="@+id/action_coinDetailFragment_to_coinListFragment"
+            app:destination="@id/coinListFragment" />
+    </fragment>
 </navigation>

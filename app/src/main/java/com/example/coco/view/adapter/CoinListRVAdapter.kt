@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coco.R
@@ -16,6 +17,11 @@ class CoinListRVAdapter(val context: Context, val dataSet: List<InterestCoinEnti
         fun onClick(view: View, position: Int)
     }
     var itemClick: ItemClick?= null
+
+    interface CoinItemClick{
+        fun onClick(coinName: String)
+    }
+    var coinClick: CoinItemClick?= null
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val coinName = view.findViewById<TextView>(R.id.coinName)
@@ -38,6 +44,10 @@ class CoinListRVAdapter(val context: Context, val dataSet: List<InterestCoinEnti
             itemClick?.onClick(v, position)
 
 
+        }
+
+        holder.itemView.findViewById<LinearLayout>(R.id.linearLayout).setOnClickListener { v->
+            coinClick?.onClick(dataSet[position].coin_name)
         }
 
         holder.coinName.text = dataSet[position].coin_name
