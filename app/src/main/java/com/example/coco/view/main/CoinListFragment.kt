@@ -1,5 +1,6 @@
 package com.example.coco.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coco.R
 import com.example.coco.databinding.FragmentCoinListBinding
@@ -77,6 +79,14 @@ class CoinListFragment : Fragment() {
 
         }
 
+        selectedRVAdapter.coinClick = object : CoinListRVAdapter.CoinItemClick {
+            override fun onClick(coinName: String) {
+                val bundle = Bundle()
+                bundle.putString("coin", coinName)
+                findNavController().navigate(R.id.action_coinListFragment_to_coinDetailFragment, bundle)
+            }
+        }
+
         val unselectedRVAdapter = CoinListRVAdapter(requireContext(), unselectedList)
         binding.unSelectedCoinRV.adapter = unselectedRVAdapter
         binding.unSelectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
@@ -87,6 +97,16 @@ class CoinListFragment : Fragment() {
             }
 
         }
+
+        unselectedRVAdapter.coinClick = object : CoinListRVAdapter.CoinItemClick {
+            override fun onClick(coinName: String) {
+                val bundle = Bundle()
+                bundle.putString("coin", coinName)
+                findNavController().navigate(R.id.action_coinListFragment_to_coinDetailFragment, bundle)
+            }
+        }
+
+
     }
 
     override fun onDestroy() {

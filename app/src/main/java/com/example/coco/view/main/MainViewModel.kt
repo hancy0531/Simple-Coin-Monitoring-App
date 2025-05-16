@@ -5,16 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.coco.dataModel.UpDownDataSet
 import com.example.coco.db.entity.InterestCoinEntity
+import com.example.coco.network.model.CurrentPriceList
 import com.example.coco.repository.DBRepository
+import com.example.coco.repository.NetworkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class MainViewModel: ViewModel() {
 
     private val dbRepository = DBRepository()
+    private val networkRepository = NetworkRepository()
     lateinit var selectedCoinList: LiveData<List<InterestCoinEntity>>
 
     private val _arr15min = MutableLiveData<List<UpDownDataSet>>()
@@ -28,6 +33,10 @@ class MainViewModel: ViewModel() {
     private val _arr45min = MutableLiveData<List<UpDownDataSet>>()
     val arr45min: LiveData<List<UpDownDataSet>>
         get() = _arr45min
+
+    private val _coinData = MutableLiveData<CurrentPriceList>()
+    val coinData: LiveData<CurrentPriceList>
+        get() = _coinData
 
     //CoinListFragment
 
@@ -99,6 +108,14 @@ class MainViewModel: ViewModel() {
 
 
 
+    }
+
+    // CoinDetailFragment
+
+    fun getCoinData(coin: String) = viewModelScope.launch {
+        //Timber.d(coin)
+        _coinData.value =  networkRepository.getCoinData(coin)
+        Timber.d(coinData.value?.data.toString())
     }
 
 

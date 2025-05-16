@@ -14,4 +14,7 @@ interface Api {
     @GET("public/transaction_history/{coin}_KRW")
     suspend fun getRecentCoinPrice(@Path("coin") coin: String): RecentCoinPriceList
 
+    @GET("/public/ticker/{coin}")
+    suspend fun getCoinDetail(@Path("coin") coin: String): CurrentPriceList
+
 }

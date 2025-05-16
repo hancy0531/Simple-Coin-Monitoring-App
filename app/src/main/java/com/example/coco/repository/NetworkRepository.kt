@@ -11,4 +11,5 @@ class NetworkRepository {
 
     suspend fun getInterestCoinPriceData(coin: String) = client.getRecentCoinPrice(coin)
 
+    suspend fun getCoinData(coin: String) = client.getCoinDetail(coin)
 }
